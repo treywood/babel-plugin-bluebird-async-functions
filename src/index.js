@@ -1,7 +1,7 @@
 export default function({ types: t }) {
 
   const REPLACED = Symbol();
-  const bluebird = t.identifier("Bluebird");
+  const bluebird = t.identifier("Promise");
 
   return {
     visitor: {
