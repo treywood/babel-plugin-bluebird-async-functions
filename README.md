@@ -26,10 +26,10 @@ class MyClass {
   }
   
   // async generator
-  * async getLotsOfData() {
+  async getLotsOfData() {
     let datas = [];
     for (let i = 0; i < 10; i++) {
-      let datum = yield Promise.resolve(i).delay(500);
+      let datum = await Promise.resolve(i).delay(500);
       datas.push(datum);
     }
     return datas;
