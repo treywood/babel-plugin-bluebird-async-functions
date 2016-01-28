@@ -6,9 +6,12 @@ This plugin requires the `babel-plugin-syntax-async-functions` plugin to be load
 
 # Installation
 
-`npm install babel-plugin-bluebird-async-functions`
+Install with NPM:
+```bash
+npm install babel-plugin-bluebird-async-functions
+```
 
-reference this plugin (with the `babel-plugin-syntax-async-functions` plugin first) in your .babelrc file:
+Reference this plugin (with the `babel-plugin-syntax-async-functions` plugin first) in your .babelrc file:
 ```json
 {
   "presets": ["es2015"],
