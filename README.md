@@ -1,5 +1,5 @@
 # babel-plugin-bluebird-async-functions
-Convert async methods and generator functions into Bluebird's Coroutine and Method helpers by wrapping methods marked as 'async' with the ```Promise.method``` method, and async generator methods with ```Promise.coroutine```.
+Convert async methods into Bluebird's Coroutine and Method helpers by wrapping methods marked as 'async' with the ```Promise.method``` method, and async methods  containing 'await' expressions with the ```Promise.coroutine```.
 
 # Dependencies
 This plugin requires the `babel-plugin-syntax-async-functions` plugin to be loaded before it in order for Babel to properly parse async method definitions:
@@ -24,7 +24,7 @@ class MyClass {
   async getData() {  
     return Promise.resolve("data").delay(500);
   }
-  
+
   // async generator
   async getLotsOfData() {
     let datas = [];
