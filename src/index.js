@@ -7,17 +7,6 @@ export default function({ types: t }) {
   return {
     visitor: {
 
-      AwaitExpression(path) {
-        let { node } = path;
-        let arg = node.argument;
-        path.replaceWith(t.yieldExpression(arg));
-
-        // if there's an 'await', we'll turn the function into a generator
-        if (funcNode) {
-          funcNode.generator = true;
-        }
-      },
-
       FunctionExpression: {
 
         enter(path) {
@@ -39,6 +28,20 @@ export default function({ types: t }) {
 
             funcNode = null;
           }
+        }
+      },
+
+      AwaitExpression(path) {
+        let { node } = path;
+        let arg = node.argument;
+        path.replaceWith(t.yieldExpression(arg));
+
+        // if there's an 'await', we'll turn the function into a generator
+        if (funcNode) {
+          // assert that 'await' is used in async methods only
+          t.assertFunctionExpression(funcNode, { async: true });
+          
+          funcNode.generator = true;
         }
       }
     }
