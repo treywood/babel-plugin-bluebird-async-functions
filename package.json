@@ -8,7 +8,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "postinstall": "babel src --out-dir lib"
+    "prepublish": "babel src --out-dir lib"
   },
   "author": "Trey Wood",
   "license": "MIT",
