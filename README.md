@@ -2,9 +2,13 @@
 Convert async methods into Bluebird's Coroutine and Method helpers by wrapping methods marked as 'async' with the ```Promise.method``` method, and async methods  containing 'await' expressions with the ```Promise.coroutine```.
 
 # Dependencies
-This plugin requires the `babel-plugin-syntax-async-functions` plugin to be loaded before it in order for Babel to properly parse async method definitions:
+This plugin requires the `babel-plugin-syntax-async-functions` plugin to be loaded before it in order for Babel to properly parse async method definitions.
 
-.babelrc:
+# Installation
+
+`npm install babel-plugin-bluebird-async-functions`
+
+reference this plugin (with the `babel-plugin-syntax-async-functions` plugin first) in your .babelrc file:
 ```json
 {
   "presets": ["es2015"],
