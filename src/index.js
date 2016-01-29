@@ -1,35 +1,14 @@
-export default function({ types: t }) {
+import transform from './functionTransform';
 
-  const REPLACED = Symbol();
-  const bluebird = t.identifier("Promise");
-  var funcNode = null;
+var stack = [];
+
+export default function({ types: t }) {
 
   return {
     visitor: {
 
-      FunctionExpression: {
-
-        enter(path) {
-          let { node } = path;
-          if (!node[REPLACED] && node.async === true) {
-            funcNode = node;
-          }
-        },
-
-        exit(path) {
-          if (funcNode && !funcNode[REPLACED] && funcNode.async === true) {
-            // generators use 'coroutine' helper, other wise just 'method'
-            let methodName = funcNode.generator ? "coroutine": "method";
-            let asyncWrap = t.memberExpression(bluebird, t.identifier(methodName));
-
-            funcNode[REPLACED] = true;
-            funcNode.async = false; // prevent recursive visits
-            path.replaceWith(t.callExpression(asyncWrap, [funcNode]));
-
-            funcNode = null;
-          }
-        }
-      },
+      FunctionExpression: transform(t, stack),
+      ArrowFunctionExpression: transform(t, stack),
 
       AwaitExpression(path) {
         let { node } = path;
@@ -37,11 +16,11 @@ export default function({ types: t }) {
         path.replaceWith(t.yieldExpression(arg));
 
         // if there's an 'await', we'll turn the function into a generator
-        if (funcNode) {
+        let fn = stack[stack.length - 1];
+        if (fn) {
           // assert that 'await' is used in async methods only
-          t.assertFunctionExpression(funcNode, { async: true });
-          
-          funcNode.generator = true;
+          t.assertFunctionExpression(fn, { async: true });
+          fn.generator = true;
         }
       }
     }

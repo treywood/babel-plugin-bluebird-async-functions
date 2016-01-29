@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-bluebird-async-functions",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "Wrap async methods with Bluebird's Coroutine and Method helpers",
   "keywords": ["babel", "babel-plugin", "bluebird", "async", "await", "coroutine"],
   "repository": {
