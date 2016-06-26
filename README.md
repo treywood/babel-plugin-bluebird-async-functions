@@ -8,7 +8,7 @@ This plugin requires the `babel-plugin-syntax-async-functions` plugin to be load
 
 Install with NPM:
 ```bash
-npm install babel-plugin-bluebird-async-functions
+npm install babel-plugin-bluebird-async-functions --save-dev
 ```
 
 Reference this plugin (with the `babel-plugin-syntax-async-functions` plugin first) in your .babelrc file:
